@@ -1,0 +1,94 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: #57889f;
+}
+h2,p,h3,span{
+    line-height: 1.5;
+    color: #333333;
+}
+
+
+main{
+    max-width: 1000px;
+    margin: auto;
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.card{
+    position: relative;
+    width: 450px;
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 4px 4px 6px #33333330;
+}
+.delete{
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    cursor: pointer;
+}
+.card .txt{
+    margin: auto auto auto 10px;
+}
+.button{
+    margin-top: 3px;
+    display: flex;
+flex-direction:row;
+}
+.button > i{
+    vertical-align:center;
+}
+button{
+    border: 0;background: transparent;
+    cursor: pointer;
+}
+
+.button > span{
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+}
+
+.card img{
+    width: 150px;
+    margin: 20px;
+}
+.summary{
+    position: fixed;
+    left: 55%;
+    width: 400px;
+    padding: 10px;
+
+}
+.summary > div{
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 4px 4px 6px #33333330;
+}
+h1,h2{
+    text-align: center;
+    color: #333333;
+}
+.item{
+    margin: 10px;
+}
+
+.summary h1{
+
+    margin: 10px auto 10px auto;
+}
+.summary h3{
+    text-align: center;
+    margin-top: 30px;
+}

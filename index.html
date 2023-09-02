@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>浪浪咖啡島｜伙食費估算</title>
+    <link rel="icon" href="image/favicon.ico" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <main>
+        <div class="dogs">
+          <div v-for="(item,index) in dogs" :key="index" class="card">
+            <img :src="item.picsrc" alt="" />
+            <div class="txt">
+              <h3>{{item.dogname}}</h3>
+              <i
+                @click="remove(index)"
+                class="fa-solid fa-x fa-2xs delete"
+                style="color: #333333"
+              ></i>
+              <p>最愛食譜：{{item.favorite}}</p>
+              <p>週伙食費：{{item.feedcost}}元</p>
+              <div class="button">
+                飼養週數：&nbsp;&nbsp;
+                <button @click="reduceCount(item)">
+                  <i
+                    class="fa-solid fa-minus fa-2xs"
+                    style="color: #57889f"
+                  ></i></button
+                ><span>{{item.count}}</span>
+                <button @click="increaseCount(item)">
+                  <i class="fa-solid fa-plus fa-2xs" style="color: #57889f"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="summary">
+          <h1><img src="./image/logo-white.svg" alt="" /></h1>
+          <div>
+            <h2>伙食費估算</h2>
+            <div class="txt">
+              <div v-for="(item,index) in dogs" :key="index" class="item">
+                <div v-if="item.count > 0">
+                  <h4>{{item.dogname}}</h4>
+                  <p>
+                    {{item.feedcost}} * {{item.count}}週 =
+                    <i
+                      class="fa-solid fa-sack-dollar"
+                      style="color: #333333"
+                    ></i>
+                    {{item.feedcost*item.count}}
+                  </p>
+                </div>
+              </div>
+              <h3>
+                伙食費總計&nbsp;&nbsp;<i
+                  class="fa-solid fa-sack-dollar"
+                  style="color: #333333"
+                ></i>
+                &nbsp;{{sum}}
+              </h3>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            dogs: [
+              {
+                dogname: "浪皮蛋",
+                favorite: "乾飼料",
+                picsrc: "./image/dog1.jpg",
+                feedcost: 80,
+                count: 0,
+              },
+              {
+                dogname: "浪巧達",
+                favorite: "乾飼料+水煮雞肉",
+                picsrc: "./image/dog2.jpg",
+                feedcost: 150,
+                count: 0,
+              },
+              {
+                dogname: "浪波妞",
+                favorite: "乾飼料+水煮花椰菜",
+                picsrc: "./image/dog3.jpg",
+                feedcost: 230,
+                count: 0,
+              },
+              {
+                dogname: "浪大哥",
+                favorite: "現煎牛肉塊",
+                picsrc: "./image/dog4.jpg",
+                feedcost: 1500,
+                count: 1,
+              },
+              {
+                dogname: "浪琪琪",
+                favorite: "飼料泡水+雞肉罐頭",
+                picsrc: "./image/dog5.jpg",
+                feedcost: 100,
+                count: 0,
+              },
+            ],
+          };
+        },
+        computed: {
+          sum() {
+            let sum = 0;
+            for (let i = 0; i < this.dogs.length; i++) {
+              let total = this.dogs[i].feedcost * this.dogs[i].count;
+              sum += total;
+            }
+            return sum;
+          },
+        },
+        methods: {
+          //減少數量
+          reduceCount(item, index) {
+            if (item.count > 0) {
+              item.count--;
+            }
+          },
+          //新增數量
+          increaseCount(item) {
+            item.count++;
+          },
+          //刪除品項
+          remove(index) {
+            this.dogs.splice(index, 1);
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
