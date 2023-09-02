@@ -15,35 +15,44 @@
     <div id="app">
       <main>
         <div class="dogs">
-          <div v-for="(item,index) in dogs" :key="index" class="card">
-            <img :src="item.picsrc" alt="" />
-            <div class="txt">
-              <h3>{{item.dogname}}</h3>
-              <i
-                @click="remove(index)"
-                class="fa-solid fa-x fa-2xs delete"
-                style="color: #333333"
-              ></i>
-              <p>最愛食譜：{{item.favorite}}</p>
-              <p>
-                週伙食費：<input
-                  type="number"
-                  v-model="item.feedcost"
-                />&nbsp;&nbsp;元
-              </p>
-              <div class="button">
-                飼養週數：&nbsp;&nbsp;
-                <button @click="reduceCount(item)">
-                  <i
-                    class="fa-solid fa-minus fa-2xs"
-                    style="color: #57889f"
-                  ></i></button
-                ><span>{{item.count}}</span>
-                <button @click="increaseCount(item)">
-                  <i class="fa-solid fa-plus fa-2xs" style="color: #57889f"></i>
-                </button>
+          <div v-if="dogscount > 0">
+            <p class="counttext">目前共有{{dogscount}}隻浪浪</p>
+            <div v-for="(item,index) in dogs" :key="index" class="card">
+              <img :src="item.picsrc" alt="" />
+              <div class="txt">
+                <h3>{{item.dogname}}</h3>
+                <i
+                  @click="remove(index)"
+                  class="fa-solid fa-x fa-2xs delete"
+                  style="color: #333333"
+                ></i>
+                <p>最愛食譜：{{item.favorite}}</p>
+                <p>
+                  週伙食費：<input
+                    type="number"
+                    v-model="item.feedcost"
+                  />&nbsp;&nbsp;元
+                </p>
+                <div class="button">
+                  飼養週數：&nbsp;&nbsp;
+                  <button @click="reduceCount(item)">
+                    <i
+                      class="fa-solid fa-minus fa-2xs"
+                      style="color: #57889f"
+                    ></i></button
+                  ><span>{{item.count}}</span>
+                  <button @click="increaseCount(item)">
+                    <i
+                      class="fa-solid fa-plus fa-2xs"
+                      style="color: #57889f"
+                    ></i>
+                  </button>
+                </div>
               </div>
             </div>
+          </div>
+          <div v-else>
+            <p class="counttext">沒有浪浪</p>
           </div>
         </div>
         <div class="summary">
@@ -128,6 +137,9 @@
               sum += total;
             }
             return sum;
+          },
+          dogscount() {
+            return this.dogs.length;
           },
         },
         methods: {
