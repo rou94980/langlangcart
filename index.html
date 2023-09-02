@@ -25,7 +25,12 @@
                 style="color: #333333"
               ></i>
               <p>最愛食譜：{{item.favorite}}</p>
-              <p>週伙食費：{{item.feedcost}}元</p>
+              <p>
+                週伙食費：<input
+                  type="number"
+                  v-model="item.feedcost"
+                />&nbsp;&nbsp;元
+              </p>
               <div class="button">
                 飼養週數：&nbsp;&nbsp;
                 <button @click="reduceCount(item)">
@@ -139,6 +144,9 @@
           //刪除品項
           remove(index) {
             this.dogs.splice(index, 1);
+          },
+          feedcostChange(item) {
+            return item.feedcost * 2;
           },
         },
       }).mount("#app");
